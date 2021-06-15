@@ -5,4 +5,11 @@ class Member < ApplicationRecord
     has_many :inverse_friends, through: :inverse_friendships, source: :member
 
     validates :first_name, :last_name, :url, presence: true
+
+    attribute :my_friends
+
+    def my_friends
+        friends
+    end
+
 end
