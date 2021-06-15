@@ -7,7 +7,8 @@ class MembersController < ApplicationController
     member = Member.create!({
       first_name: params[:first_name],
       last_name: params[:last_name],
-      url: params[:url]  
+      url: params[:url],
+      shortened_url: UrlService.shorten(params[:url])
     })
     render json: member
   end
