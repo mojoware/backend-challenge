@@ -1,16 +1,10 @@
 class MembersController < ApplicationController
   def index
-    render json: Member.all
+    render json: Member.all.order(:id)
   end
 
   def create
-    member = Member.create!({
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      url: params[:url],
-      shortened_url: UrlService.shorten(params[:url])
-    })
-    render json: member
+    render json: Member.create!(member_params)
   end
 
   def show
@@ -18,8 +12,17 @@ class MembersController < ApplicationController
   end
 
   def update
+    render json: Member.find(params[:id]).update(member_params)
   end
 
   def destroy
+    render json: Member.find(params[:id]).destroy
   end
+
+  private
+
+  def member_params
+    params.require(:member).permit(:id, :first_name, :last_name, :url, :shortened_url)
+  end
+
 end
