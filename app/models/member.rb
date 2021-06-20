@@ -14,7 +14,7 @@ class Member < ApplicationRecord
     attribute :my_friends
 
     def my_friends
-        friends
+        friends.count + inverse_friends.count
     end
 
     def full_name
