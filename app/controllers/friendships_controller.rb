@@ -1,6 +1,6 @@
 class FriendshipsController < ApplicationController
   def index
-    render json: Friendship.all
+    render json: Friendship.all.order(:id)
   end
 
   def create
@@ -23,7 +23,7 @@ class FriendshipsController < ApplicationController
   private
 
   def friendship_params
-    params.permit(:member_id, :friend_id)
+    params.require(:friendship).permit(:member_id, :friend_id)
   end 
 
 end
