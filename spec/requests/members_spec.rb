@@ -49,6 +49,7 @@ describe 'Members', type: :request do
   end
 
   describe 'viewing a member' do
+    let!(:member) { FactoryBot.create(:member) }
     context 'when member exists' do
       subject { get "/members/#{Member.first.id}", headers: headers }
 
